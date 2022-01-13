@@ -2,8 +2,10 @@ from django.db import models
 from .base import BaseModel
 from .user import User
 
+
 class Warehouse(BaseModel):
-    manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    manager = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=255)
     capacity = models.PositiveIntegerField()
     description = models.TextField(blank=True, null=True)

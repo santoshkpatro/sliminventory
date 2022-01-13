@@ -2,19 +2,23 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from .base import BaseModel
 
+
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(email=self.normalize_email(email), first_name=first_name)
+        user = self.model(email=self.normalize_email(
+            email), first_name=first_name)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
+
 class User(AbstractBaseUser, BaseModel):
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    email = models.EmailField(
+        verbose_name='email address', max_length=255, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     is_active = models.BooleanField(default=True)
