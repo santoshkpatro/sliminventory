@@ -1,4 +1,4 @@
-from rest_framework import generics, serializers
+from rest_framework import generics, serializers, permissions
 from app.models import Warehouse, User
 from app.exceptions.user import UserNotFoundException
 
@@ -55,8 +55,10 @@ class WarehouseSerializer(serializers.ModelSerializer):
 class WarehouseListView(generics.ListCreateAPIView):
     serializer_class = WarehouseSerializer
     queryset = Warehouse.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class WarehouseDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = WarehouseSerializer
     queryset = Warehouse.objects.all()
+    permission_classes = [permissions.IsAuthenticated]

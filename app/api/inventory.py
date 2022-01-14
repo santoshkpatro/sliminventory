@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from rest_framework import generics, serializers
+from rest_framework import generics, serializers, permissions
 from app.models import Inventory
 from app.models import Warehouse, Supplier, Product
 from app.exceptions.warehouse import WarehouseNotFoundException
@@ -126,8 +126,10 @@ class InventorySerializer(serializers.ModelSerializer):
 class InventoryListView(generics.ListCreateAPIView):
     serializer_class = InventorySerializer
     queryset = Inventory.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class InventoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = InventorySerializer
     queryset = Inventory.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
