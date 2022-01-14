@@ -3,6 +3,7 @@ from django.urls import path
 from app.api.product import ProductListView, ProductDetailView
 from app.api.supplier import SupplierListView, SupplierDetailView
 from app.api.warehouse import WarehouseListView, WarehouseDetailView
+from app.api.inventory import InventoryListView, InventoryDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,5 +18,9 @@ urlpatterns = [
 
     # warehouses
     path('api/warehouses/', WarehouseListView.as_view()),
-    path('api/warehouses/<int:pk>/', WarehouseDetailView.as_view())
+    path('api/warehouses/<int:pk>/', WarehouseDetailView.as_view()),
+
+    # inventories
+    path('api/inventories/', InventoryListView.as_view()),
+    path('api/inventories/<int:pk>/', InventoryDetailView.as_view())
 ]
